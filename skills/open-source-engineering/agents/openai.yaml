@@ -1,0 +1,4 @@
+interface:
+  display_name: "Open Source Engineering"
+  short_description: "Build simple, readable, composable software"
+  default_prompt: "Use $open-source-engineering to implement or refactor this code with the simplest maintainable design and verify the result."
