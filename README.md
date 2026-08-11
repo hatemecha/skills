@@ -28,6 +28,7 @@ These commands will work after this repository is published as `hatemecha/codex-
 | --- | --- | --- |
 | [`ensayo-editor`](./skills/ensayo-editor) | Edits and audits Spanish essays while preserving the author's voice. | `npx skills add hatemecha/codex-skills --skill ensayo-editor -g -a codex -y` |
 | [`open-source-project`](./skills/open-source-project) | Creates, converts, audits, and prepares genuinely open-source software projects. | `npx skills add hatemecha/codex-skills --skill open-source-project -g -a codex -y` |
+| [`open-source-engineering`](./skills/open-source-engineering) | Builds, refactors, and reviews simple, readable, composable software using Unix, SICP, DRY, Agile, kernel-maintainability, and open-engineering principles. | `npx skills add hatemecha/codex-skills --skill open-source-engineering -g -a codex -y` |
 | [`orchestrating-engineering-agents`](./skills/orchestrating-engineering-agents) | Coordinates adaptive multi-agent software engineering, evidence gates, and orchestration evaluation. | `npx skills add hatemecha/codex-skills --skill orchestrating-engineering-agents -g -a codex -y` |
 
 ## Usage
@@ -37,6 +38,16 @@ Skills can activate automatically when a request matches their description. You 
 ```text
 Use $open-source-project to prepare this repository for its first public release.
 ```
+
+### Open Source Engineering
+
+Use it for implementation, refactoring, architecture review, technical-debt cleanup, or when you want an agent to favor simple and composable code instead of speculative layers:
+
+```text
+Use $open-source-engineering to review this module, preserve its behavior, remove unnecessary complexity, and verify the refactor.
+```
+
+It treats KISS and size/nesting heuristics as engineering signals rather than rigid style laws, applies DRY to duplicated knowledge rather than duplicated text, favors explicit data flow and narrow interfaces, and includes specific controls against common AI-generated over-engineering. Pair it with `$open-source-project` when licensing, publication, governance, contribution, or repository-level openness are also part of the task.
 
 ### Engineering Agent Orchestrator
 
@@ -80,6 +91,13 @@ codex-skills/
 │   │   ├── agents/
 │   │   │   └── openai.yaml
 │   │   ├── references/
+│   │   └── SKILL.md
+│   ├── open-source-engineering/
+│   │   ├── agents/
+│   │   │   └── openai.yaml
+│   │   ├── references/
+│   │   │   ├── foundations.md
+│   │   │   └── review-playbook.md
 │   │   └── SKILL.md
 │   └── orchestrating-engineering-agents/
 │       ├── agents/
