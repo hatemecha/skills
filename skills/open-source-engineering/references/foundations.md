@@ -26,7 +26,7 @@ That supports preferences for:
 - useful diagnostics;
 - avoiding artificial technical lock-in.
 
-Do not reverse this implication. Readable or modular code is not automatically free/open-source software. Licensing and distribution conditions still matter; use `$open-source-project` for that assessment.
+Do not reverse this implication. Readable or modular code is not automatically free/open-source software. Licensing and distribution conditions still matter; use the `open-source-project` skill for that assessment.
 
 ## 2. Unix: small tools, composition, early trial, and leverage
 
