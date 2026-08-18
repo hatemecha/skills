@@ -1,112 +1,98 @@
-# Codex Skills
+# Skills
 
-[![Validate skills](https://github.com/hatemecha/codex-skills/actions/workflows/validate-skills.yml/badge.svg)](https://github.com/hatemecha/codex-skills/actions/workflows/validate-skills.yml)
+Portable, reusable Agent Skills for software engineering and repository work.
 
-Personal Agent Skills for repeatable, high-quality work with Codex and other compatible coding agents.
+This repository follows the open [Agent Skills specification](https://agentskills.io/specification): each skill is self-contained, uses a standard `SKILL.md`, and keeps provider-specific integrations optional. The core instructions are designed to work with any agent that can consume Agent Skills rather than depending on a single model, vendor, or CLI.
 
-## Quick install
+## Install
 
-Install a skill globally for Codex:
-
-```bash
-npx skills add hatemecha/codex-skills --skill open-source-project -g -a codex -y
-```
-
-Or install it with GitHub CLI:
+List the available skills:
 
 ```bash
-gh skill install hatemecha/codex-skills skills/open-source-project
+npx skills add hatemecha/skills --list
 ```
 
-The GitHub CLI method requires `gh` 2.90.0 or later.
+Install interactively for the agents detected on your machine:
 
-These commands will work after this repository is published as `hatemecha/codex-skills`.
+```bash
+npx skills add hatemecha/skills
+```
 
-## Skills
+Install one skill:
 
-| Skill | What it does | Install |
-| --- | --- | --- |
-| [`ensayo-editor`](./skills/ensayo-editor) | Edits and audits Spanish essays while preserving the author's voice. | `npx skills add hatemecha/codex-skills --skill ensayo-editor -g -a codex -y` |
-| [`open-source-project`](./skills/open-source-project) | Creates, converts, audits, and prepares genuinely open-source software projects. | `npx skills add hatemecha/codex-skills --skill open-source-project -g -a codex -y` |
-| [`open-source-engineering`](./skills/open-source-engineering) | Builds, refactors, and reviews simple, readable, composable software using Unix, SICP, DRY, Agile, kernel-maintainability, and open-engineering principles. | `npx skills add hatemecha/codex-skills --skill open-source-engineering -g -a codex -y` |
-| [`orchestrating-engineering-agents`](./skills/orchestrating-engineering-agents) | Coordinates adaptive multi-agent software engineering, evidence gates, and orchestration evaluation. | `npx skills add hatemecha/codex-skills --skill orchestrating-engineering-agents -g -a codex -y` |
+```bash
+npx skills add hatemecha/skills --skill open-source-engineering
+```
+
+Target one or more supported agents when you want explicit placement:
+
+```bash
+npx skills add hatemecha/skills --skill open-source-engineering -a cursor -a claude-code
+```
+
+Use `-g` for a global installation or `--all` to install all skills for all detected agents. See the [`skills` CLI](https://github.com/vercel-labs/skills) for the current agent list and install options.
+
+You can also copy a skill directory manually into the skills directory used by an Agent Skills-compatible runtime.
+
+## Catalog
+
+| Skill | Purpose |
+| --- | --- |
+| [`open-source-engineering`](./skills/open-source-engineering) | Design, implement, refactor, and review software with a strong bias toward simplicity, readability, composability, evidence, and low technical debt. |
+| [`open-source-project`](./skills/open-source-project) | Create, convert, audit, and prepare genuinely open-source projects, including licensing, documentation, governance, portability, privacy, and release readiness. |
+| [`orchestrating-engineering-agents`](./skills/orchestrating-engineering-agents) | Design or execute adaptive multi-agent engineering workflows with bounded roles, evidence gates, independent review, and evaluation. |
 
 ## Usage
 
-Skills can activate automatically when a request matches their description. You can also invoke one explicitly:
+Agents that support automatic skill discovery can activate a skill from its frontmatter description. You can also request it by name without relying on provider-specific invocation syntax.
 
 ```text
-Use $open-source-project to prepare this repository for its first public release.
+Use the open-source-engineering skill to review this module, preserve behavior, remove unnecessary complexity, and verify the refactor.
 ```
-
-### Open Source Engineering
-
-Use it for implementation, refactoring, architecture review, technical-debt cleanup, or when you want an agent to favor simple and composable code instead of speculative layers:
 
 ```text
-Use $open-source-engineering to review this module, preserve its behavior, remove unnecessary complexity, and verify the refactor.
+Use the open-source-project skill to prepare this repository for a public open-source release and report any blockers.
 ```
-
-It treats KISS and size/nesting heuristics as engineering signals rather than rigid style laws, applies DRY to duplicated knowledge rather than duplicated text, favors explicit data flow and narrow interfaces, and includes specific controls against common AI-generated over-engineering. Pair it with `$open-source-project` when licensing, publication, governance, contribution, or repository-level openness are also part of the task.
-
-### Engineering Agent Orchestrator
-
-Use it when a software task benefits from multiple agents or when designing/testing an agentic engineering workflow:
 
 ```text
-Use $orchestrating-engineering-agents to implement this feature with an adaptive multi-agent workflow and verify it before declaring it complete.
+Use the orchestrating-engineering-agents skill to implement this feature with the smallest useful multi-agent topology and independent verification.
 ```
 
-The skill chooses the smallest useful topology instead of forcing every task through a fixed squad. It separates authorship from approval, uses deterministic evidence gates, supports state-machine control and bounded repair loops, and includes a simulation/evaluation regime for testing orchestration designs against simpler baselines.
+## Portability contract
 
-### Ensayo Editor
+Every skill in this repository should satisfy these rules:
 
-Invoke it explicitly with a mode and paste a fragment or full essay:
+- `SKILL.md` is the portable source of truth.
+- Required frontmatter is limited to standard Agent Skills fields unless a field is demonstrably portable.
+- Core instructions do not assume Codex, Claude Code, Cursor, OpenCode, Gemini CLI, Copilot, or any other specific runtime.
+- Capabilities such as subagents, shell access, browsers, network access, or file writes are treated conditionally when they may not exist.
+- Provider-specific metadata belongs in optional adapter files such as `agents/openai.yaml`; removing those adapters must not break the skill itself.
+- Supporting content uses relative links and lives in `references/`, `scripts/`, or `assets/` only when it materially improves the skill.
+- A skill must not claim that a command, test, review, subagent, or tool ran when the current runtime cannot actually execute it.
 
-```text
-Usá $ensayo-editor en modo diagnóstico sobre este texto.
-```
-
-Available modes are diagnosis, minimal correction, artificial-voice audit, argumentative review, compared proposal, and clean version. A clean version is generated only when explicitly requested and uses only justified or previously approved changes.
-
-The skill's [author voice profile](./skills/ensayo-editor/references/voz-del-autor.md) records the evidence level for every trait. No personal writing samples were available in this repository when the profile was created, so it relies on the author's explicit editorial preferences and keeps uncertain traits as hypotheses.
-
-## Compatibility
-
-The skills follow the open [Agent Skills specification](https://agentskills.io/specification). They use standard `SKILL.md`, `references/`, `scripts/`, and `assets/` conventions where applicable.
-
-Some skills may also include `agents/openai.yaml` to improve their presentation in Codex. This metadata is optional for other compatible agents.
+See [CONTRIBUTING.md](./CONTRIBUTING.md) for the full quality bar.
 
 ## Repository structure
 
 ```text
-codex-skills/
+skills/
 ├── skills/
-│   ├── ensayo-editor/
-│   │   ├── agents/
-│   │   │   └── openai.yaml
+│   ├── open-source-engineering/
+│   │   ├── agents/          # optional provider adapters
 │   │   ├── references/
 │   │   └── SKILL.md
 │   ├── open-source-project/
 │   │   ├── agents/
-│   │   │   └── openai.yaml
 │   │   ├── references/
-│   │   └── SKILL.md
-│   ├── open-source-engineering/
-│   │   ├── agents/
-│   │   │   └── openai.yaml
-│   │   ├── references/
-│   │   │   ├── foundations.md
-│   │   │   └── review-playbook.md
 │   │   └── SKILL.md
 │   └── orchestrating-engineering-agents/
 │       ├── agents/
-│       │   └── openai.yaml
 │       ├── references/
-│       │   ├── contracts.md
-│       │   ├── orchestration-model.md
-│       │   └── simulation-and-evals.md
 │       └── SKILL.md
+├── template/
+│   └── SKILL.md
+├── scripts/
+│   └── validate_skills.py
 ├── .github/
 │   └── workflows/
 │       └── validate-skills.yml
@@ -115,9 +101,31 @@ codex-skills/
 └── README.md
 ```
 
+## Creating a skill
+
+Start from [`template/SKILL.md`](./template/SKILL.md), then keep the main file focused on the instructions that should be loaded for the task. Put detailed background material in `references/`, deterministic reusable logic in `scripts/`, and output resources in `assets/`.
+
+Before submitting changes, run:
+
+```bash
+python scripts/validate_skills.py
+npx skills add . --list
+```
+
+## Design principles
+
+This collection favors skills that are:
+
+- **portable** — useful across agents and runtimes;
+- **self-contained** — understandable without hidden prompts or private infrastructure;
+- **progressively disclosed** — concise core instructions with deeper references loaded only when useful;
+- **evidence-driven** — explicit about what was inspected, executed, verified, or left uncertain;
+- **maintainable** — clear scope, minimal duplication, and no speculative complexity;
+- **honest about capabilities** — graceful degradation instead of fabricated execution.
+
 ## Contributing
 
-This is currently a personal, maintainer-led collection. Suggestions and focused pull requests are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md) before adding or changing a skill.
+Focused issues and pull requests are welcome. This is a maintainer-led collection; inclusion is based on usefulness, portability, clarity, and maintenance cost. Read [CONTRIBUTING.md](./CONTRIBUTING.md) before adding or changing a skill.
 
 ## License
 
