@@ -6,10 +6,18 @@ on:
       - main
     paths:
       - "skills/**"
+      - "template/**"
+      - "scripts/validate_skills.py"
+      - "README.md"
+      - "CONTRIBUTING.md"
       - ".github/workflows/validate-skills.yml"
   pull_request:
     paths:
       - "skills/**"
+      - "template/**"
+      - "scripts/validate_skills.py"
+      - "README.md"
+      - "CONTRIBUTING.md"
       - ".github/workflows/validate-skills.yml"
   workflow_dispatch:
 
@@ -24,7 +32,8 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v6
 
-      - name: Validate Agent Skills
-        run: gh skill publish . --dry-run
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Validate repository structure
+        run: python scripts/validate_skills.py
+
+      - name: Verify multi-agent skill discovery
+        run: npx --yes skills add . --list
