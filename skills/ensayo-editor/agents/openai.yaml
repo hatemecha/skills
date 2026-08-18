@@ -1,4 +1,0 @@
-interface:
-  display_name: "Ensayo Editor"
-  short_description: "Editá ensayos sin borrar la voz del autor"
-  default_prompt: "Usá $ensayo-editor en modo diagnóstico para revisar este ensayo sin borrar mi voz."
