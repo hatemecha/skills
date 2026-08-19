@@ -50,9 +50,9 @@ Copy [`template/SKILL.example.md`](./template/SKILL.example.md) to `skills/<skil
 
 ## Write for progressive disclosure
 
-Keep `SKILL.md` focused on decisions and instructions the agent commonly needs. Move long background material, detailed examples, historical sources, schemas, or specialized playbooks into `references/` and link them from the exact point where they become useful.
+Assume the agent is already capable. Put in `SKILL.md` only the decisions and constraints that change its work. Move mode-specific schemas, examples, or playbooks into `references/` and link them from the point they become useful.
 
-A reference should earn its existence: avoid splitting a short skill into many tiny files simply to look modular.
+A reference should earn its existence. Do not paste historical surveys, copied manuals, or generic tutorials the agent already knows. Do not split a short skill into many tiny files to look modular.
 
 ## Add a skill
 
