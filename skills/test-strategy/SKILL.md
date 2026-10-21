@@ -1,6 +1,6 @@
 ---
 name: test-strategy
-description: Choose and implement proportionate verification for changed software behavior: unit, integration, end-to-end, contract, static checks, or focused manual testing. Use when a feature or bug fix needs evidence; decide whether TDD is useful instead of mandating tests for every detail.
+description: 'Choose and implement proportionate verification for changed software behavior: unit, integration, end-to-end, contract, static checks, or focused manual testing. Use when a feature or bug fix needs evidence; decide whether TDD is useful instead of mandating tests for every detail.'
 license: MIT
 ---
 
