@@ -59,6 +59,10 @@ If a check cannot run safely, continue with static inspection and mark it **not 
 
 For a review or debt audit, read [review-playbook.md](references/review-playbook.md).
 
+## Proportionate verification
+
+Protect changed behavior using the smallest appropriate evidence. Choose unit, integration, contract, E2E, static checks, or a focused visual/manual check for the actual risk. TDD may help specify stable logic but is not mandatory; do not create a test per static UI string, trivial wrapper, or incidental implementation detail. For task-specific choices, load `test-strategy` when available. Do not report a test as run unless it ran.
+
 ## AI-generated complexity
 
 Agents produce plausible structure faster than justified structure. Recover the actual requirements and simplify against them. Reject wrappers around wrappers, single-implementation interfaces, one-constructor factories, mapping layers that protect no boundary, future-proof config for variants that do not exist, helpers that hide meaning to save a line, comments that narrate syntax, catch-alls that convert failure into success, and design patterns used because the name sounds architectural.

@@ -62,7 +62,7 @@ A reference should earn its existence. Do not paste historical surveys, copied m
 4. Add only the supporting files required by the workflow.
 5. Add the skill to the catalog in `README.md`.
 6. Run the repository validation commands.
-7. Test the skill in at least one compatible agent when practical.
+7. Test the skill in at least one compatible agent when practical. Add activation/non-activation scenarios to `evals/routing-cases.json` when routing changes.
 8. If you add provider-specific metadata, confirm the skill still works conceptually without it.
 
 ## Validate locally
@@ -78,13 +78,11 @@ python scripts/validate_skills.py
 Then run the Agent Skills reference validator and verify discovery with the pinned multi-agent skills CLI:
 
 ```bash
-agentskills validate skills/open-source-engineering
-agentskills validate skills/open-source-project
-agentskills validate skills/orchestrating-engineering-agents
+for skill in skills/*; do agentskills validate "$skill"; done
 python scripts/check_discovery.py
 ```
 
-The discovery output must contain exactly the installable directories under `skills/`; a template or example must never appear. When changing a skill, also review its local links and any scripts it references. Execute deterministic checks only behind the skill's trust boundary and state anything you could not verify.
+Routing fixtures are checked structurally by CI; they are **not** model-behavior evaluations. Follow `docs/evaluation.md` for manual cross-runtime runs. The discovery output must contain exactly the installable directories under `skills/`; a template or example must never appear. When changing a skill, also review its local links and any scripts it references. Execute deterministic checks only behind the skill's trust boundary and state anything you could not verify.
 
 ## Pull requests
 

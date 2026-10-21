@@ -30,7 +30,7 @@ Decision rules:
 
 ## Core rules
 
-1. Spawn a worker only when it owns a distinct decision, artifact, slice, or review surface.
+1. Spawn a worker only when it owns a distinct decision, artifact, slice, or review surface. An ordinary local edit does not require multi-agent orchestration.
 2. Route by risk and required evidence. Do not force every task through every role.
 3. Prefer deterministic checks over agent judgment whenever a machine can answer the question.
 4. Keep worker context narrow. Parallelize independent work, not conflicting writes.
