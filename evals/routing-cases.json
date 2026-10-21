@@ -1,0 +1,152 @@
+[
+  {
+    "id": "tiny-ui",
+    "prompt": "Center the misaligned shotgun HUD sprite. Preserve all other visuals.",
+    "must_use": [
+      "open-source-engineering"
+    ],
+    "may_use": [
+      "test-strategy",
+      "systematic-debugging"
+    ],
+    "must_not_use": [
+      "engineering-brainstorming",
+      "orchestrating-engineering-agents",
+      "open-source-project",
+      "context-handoff"
+    ],
+    "success": "Only affected visual path changes; targeted evidence; no plan or unrelated refactor."
+  },
+  {
+    "id": "regression",
+    "prompt": "The save button stopped persisting after the last update; diagnose and fix it.",
+    "must_use": [
+      "open-source-engineering",
+      "systematic-debugging"
+    ],
+    "may_use": [
+      "test-strategy"
+    ],
+    "must_not_use": [
+      "engineering-brainstorming",
+      "open-source-project",
+      "context-handoff"
+    ],
+    "success": "Reproduction, causal fix and feasible regression evidence, with honest check status."
+  },
+  {
+    "id": "new-feature",
+    "prompt": "Add an inventory capacity rule and expose remaining slots in the UI.",
+    "must_use": [
+      "open-source-engineering",
+      "test-strategy"
+    ],
+    "may_use": [
+      "engineering-brainstorming"
+    ],
+    "must_not_use": [
+      "open-source-project",
+      "context-handoff"
+    ],
+    "success": "Behavioral acceptance tested at suitable boundary without every-label unit tests."
+  },
+  {
+    "id": "game-concept",
+    "prompt": "Design a new stealth-and-panic mechanic for a Godot top-down game, then plan implementation.",
+    "must_use": [
+      "engineering-brainstorming"
+    ],
+    "may_use": [
+      "open-source-engineering",
+      "test-strategy"
+    ],
+    "must_not_use": [
+      "open-source-project",
+      "context-handoff"
+    ],
+    "success": "A concise playable loop, assumptions, meaningful alternatives and a small implementation slice."
+  },
+  {
+    "id": "auth-flow",
+    "prompt": "Implement secure password reset with token expiry and anti-enumeration behavior.",
+    "must_use": [
+      "open-source-engineering",
+      "test-strategy"
+    ],
+    "may_use": [
+      "engineering-brainstorming",
+      "orchestrating-engineering-agents"
+    ],
+    "must_not_use": [
+      "open-source-project",
+      "context-handoff"
+    ],
+    "success": "Contracts and risks covered by meaningful tests; no unsupported security claims."
+  },
+  {
+    "id": "multi-agent",
+    "prompt": "Coordinate separate implementer and independent reviewer for a risky schema migration.",
+    "must_use": [
+      "orchestrating-engineering-agents"
+    ],
+    "may_use": [
+      "open-source-engineering",
+      "test-strategy",
+      "engineering-brainstorming"
+    ],
+    "must_not_use": [
+      "open-source-project",
+      "context-handoff"
+    ],
+    "success": "Distinct roles and evidence; no imaginary agents if runtime lacks capability."
+  },
+  {
+    "id": "release",
+    "prompt": "Audit licensing and publication readiness of my public repository; don't change files.",
+    "must_use": [
+      "open-source-project"
+    ],
+    "may_use": [
+      "open-source-engineering"
+    ],
+    "must_not_use": [
+      "systematic-debugging",
+      "test-strategy",
+      "context-handoff"
+    ],
+    "success": "Read-only prioritized publication findings, no release or push."
+  },
+  {
+    "id": "handoff",
+    "prompt": "Prepare a short handoff to continue this unfinished feature in OpenCode tomorrow.",
+    "must_use": [
+      "context-handoff"
+    ],
+    "may_use": [
+      "open-source-engineering"
+    ],
+    "must_not_use": [
+      "engineering-brainstorming",
+      "orchestrating-engineering-agents",
+      "open-source-project"
+    ],
+    "success": "Verified state, performed checks and precise next action, no invented executions."
+  },
+  {
+    "id": "not-coding",
+    "prompt": "Translate this short poem into Spanish while keeping the verse breaks.",
+    "must_use": [],
+    "may_use": [],
+    "must_not_use": [
+      "engineering-workflow",
+      "open-source-engineering",
+      "systematic-debugging",
+      "test-strategy",
+      "engineering-brainstorming",
+      "orchestrating-engineering-agents",
+      "context-handoff",
+      "open-source-project"
+    ],
+    "success": "Translate only, without engineering workflow."
+  }
+]

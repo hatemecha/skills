@@ -10,6 +10,11 @@ EXPECTED_SKILLS = {
     "open-source-engineering",
     "open-source-project",
     "orchestrating-engineering-agents",
+    "engineering-workflow",
+    "systematic-debugging",
+    "test-strategy",
+    "engineering-brainstorming",
+    "context-handoff",
 }
 IGNORED_DIRS = {".git", ".venv", "venv", "node_modules", "__pycache__"}
 

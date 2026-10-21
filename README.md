@@ -1,37 +1,62 @@
 # Skills
 
-Personal Agent Skills I use for software engineering and open-source project work. They are shared in case they help someone else, not as a polished community product. Expect the occasional rough edge.
+Personal, portable [Agent Skills](https://agentskills.io/specification) for software engineering with Codex, Cursor, OpenCode, and other compatible agents. The aim is **less unnecessary code and more verified behavior**, not more process. This is a personal toolkit, not a polished community framework.
 
-Built on the [Agent Skills specification](https://agentskills.io/specification): each skill is self-contained, uses a standard `SKILL.md`, and keeps provider-specific integrations optional.
+## Quick start
 
-## Install
+Install the whole catalog globally (Node.js and `npx` required):
 
 ```bash
-npx skills add hatemecha/skills --list      # browse
-npx skills add hatemecha/skills             # install all
-npx skills add hatemecha/skills --skill open-source-engineering
+npx skills add hatemecha/skills --list
+npx skills add hatemecha/skills -g --skill '*' -a codex -a cursor -a opencode
 ```
 
-Use `-g` for a global install, or copy a skill directory into any Agent Skills-compatible runtime. See the [`skills` CLI](https://github.com/vercel-labs/skills) for agent targeting.
+For proactive usage across projects, also install the short global rules. They are **separate** from the skill installation and are not applied by `npx skills add`:
+
+```bash
+git clone https://github.com/hatemecha/skills.git
+cd skills
+python scripts/install_agent_rules.py          # preview only
+python scripts/install_agent_rules.py --apply  # Codex + OpenCode
+```
+
+Cursor User Rules must be pasted manually: run `python scripts/install_agent_rules.py --print-cursor` and paste the output into **Cursor Settings → Rules → User Rules**. Do not paste it into a project-specific rule unless that scope is intended.
+
+**Full instructions, Windows/PowerShell, remote agents, reinstall/update, safety:** [Installation guide](docs/installation.md).
+
+## How proactive routing works
+
+- The global rules tell the agent to **consider** `engineering-workflow` on coding work.
+- `engineering-workflow` classifies intent and risk, then loads relevant skills through each runtime's documented mechanism when possible.
+- Simple changes stay simple. Debugging, design, test strategy, independent review and handoff are conditional.
+- Skill selection is model-dependent; global rules and metadata improve activation, **not guarantee it**. See [routing evaluations](docs/evaluation.md).
 
 ## Catalog
 
-| Skill | Purpose |
+| Skill | When it helps |
 | --- | --- |
-| [`open-source-engineering`](./skills/open-source-engineering) | Design, implement, refactor, and review software with a bias toward simplicity and low technical debt. |
-| [`open-source-project`](./skills/open-source-project) | Create, convert, audit, and prepare genuinely open-source projects. |
-| [`orchestrating-engineering-agents`](./skills/orchestrating-engineering-agents) | Run multi-agent engineering work with bounded roles and evidence gates. |
+| [engineering-workflow](skills/engineering-workflow) | Entry point: select a proportionate workflow and relevant skills |
+| [open-source-engineering](skills/open-source-engineering) | Scoped implementation, refactoring, design and code review |
+| [systematic-debugging](skills/systematic-debugging) | Root cause, regressions and failing behavior |
+| [test-strategy](skills/test-strategy) | Unit/integration/E2E/static verification and conditional TDD |
+| [engineering-brainstorming](skills/engineering-brainstorming) | Ambiguous features, game mechanics, significant design |
+| [orchestrating-engineering-agents](skills/orchestrating-engineering-agents) | Evidence-gated parallel/independent work when warranted |
+| [context-handoff](skills/context-handoff) | Transfer real project state between agents or sessions |
+| [open-source-project](skills/open-source-project) | Licensing, public repository readiness, releases and governance |
 
-Mention a skill by name to use it, e.g. *"Use the open-source-engineering skill to review this module and remove unnecessary complexity."*
+You can still invoke one directly, e.g. “Use systematic-debugging to investigate this regression.”
 
-## Foundations
+## Principles
 
-These skills encode established practice, not invented rules. Each one leans on primary sources so you can verify the reasoning, and every skill lists the specific references it applies.
+- Inspect the relevant code first. Preserve established contracts.
+- Favor straightforward designs over speculative layers or fashionable architecture.
+- Treat TDD, game design documents, multi-agent workflows, and E2E as **tools**, not universal rituals.
+- Run relevant checks; never claim simulated tests or reviews.
+- Only use verified installed skills. Do not automatically install third-party skills.
+- Keep project-specific instructions in that project's own `AGENTS.md` rather than copying every workflow there.
 
-- **`open-source-engineering`** — applies well-known software design principles: [KISS](https://en.wikipedia.org/wiki/KISS_principle), [DRY](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself), [YAGNI](https://en.wikipedia.org/wiki/You_aren%27t_gonna_need_it), [separation of concerns](https://en.wikipedia.org/wiki/Separation_of_concerns), [low coupling / high cohesion](https://en.wikipedia.org/wiki/Coupling_(computer_programming)), and measuring before [optimizing](https://en.wikipedia.org/wiki/Program_optimization).
-- **`open-source-project`** — grounded in the canonical definitions of openness: [Open Source Definition](https://opensource.org/osd), [Free Software Definition](https://www.gnu.org/philosophy/free-sw.html), [Open Source AI Definition](https://opensource.org/ai/open-source-ai-definition), plus [SPDX](https://spdx.org/licenses/), [REUSE](https://reuse.software/spec/), [OpenSSF Best Practices](https://www.bestpractices.dev/), and [SemVer](https://semver.org/).
-- **`orchestrating-engineering-agents`** — synthesizes standard engineering-process practice: [separation of duties](https://en.wikipedia.org/wiki/Separation_of_duties) between author and approver, [independent code review](https://en.wikipedia.org/wiki/Code_review), [least privilege](https://en.wikipedia.org/wiki/Principle_of_least_privilege) for workers, and an explicit [state machine](https://en.wikipedia.org/wiki/Finite-state_machine) as the control plane.
+See [CONTRIBUTING.md](CONTRIBUTING.md) for validation, packaging, trust boundaries and development standards.
 
 ## License
 
-[MIT](./LICENSE).
+[MIT](LICENSE).
