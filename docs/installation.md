@@ -1,6 +1,6 @@
 # Install and update
 
-Requirements: modern Node.js with `npx`, Python 3.10+, and local access to Codex, Cursor or OpenCode. No installation command here touches production projects automatically.
+Requirements: **Node.js 22.20 or later** with `npx` for the current skills CLI, Python 3.10+, and local access to Codex, Cursor or OpenCode. Check `node --version` first, especially on older machines. No installation command here touches production projects automatically.
 
 ## 1. Install or update skills
 
@@ -33,7 +33,7 @@ py scripts/install_agent_rules.py
 py scripts/install_agent_rules.py --apply
 ```
 
-The installer only targets `~/.codex/AGENTS.md` and `~/.config/opencode/AGENTS.md`, on the **current machine and user account**. Preview is the default; `--apply` appends or updates only a marked section, keeping unrelated content intact. It refuses malformed markers and symlinks. Check the diff before applying if you customized either file.
+The installer targets `$CODEX_HOME/AGENTS.md` (default: `~/.codex/AGENTS.md`) and `~/.config/opencode/AGENTS.md`, on the **current machine and user account**. It warns if Codex's non-empty `AGENTS.override.md` takes precedence; inspect and reconcile that override manually, without silently overwriting it. Preview is the default; `--apply` appends or updates only a marked section, keeping unrelated content intact. It refuses malformed markers and symlinks. Check the diff before applying if you customized either file.
 
 **Cursor:** open Settings → Rules → User Rules and paste the exact text from:
 
@@ -59,7 +59,7 @@ Try: “Fix this small bug in the smallest scope and use the relevant installed 
 
 The global policy is intentionally small. Maintain project-specific build commands, architecture and constraints in each project's `AGENTS.md` when appropriate. Avoid copying every installed skill into that file.
 
-Global skills and rules are local to each machine/user. For remote SSH, container, CI or cloud agents, install in that runtime or provide project-local `.agents/skills/` and `AGENTS.md` as needed. Cursor Cloud Agents do **not** automatically receive `~/.agents/skills/`; see Cursor's **Sync Skills for Cloud Agents** feature for skills kept under `~/.cursor/skills/`.
+Global skills and rules are local to each machine/user. For remote SSH, container, CI or cloud agents, install in that runtime or provide project-local `.agents/skills/` and `AGENTS.md` as needed. Cursor Cloud Agents do **not** automatically receive `~/.agents/skills/`. For cloud use, install/copy your personal skills under `~/.cursor/skills/` and enable **Sync Skills for Cloud Agents** in Cursor Settings → Agents; do not keep duplicated local definitions with conflicting versions. Automation runs do not load personal synced skills: put those skills in the repository's `.cursor/skills/` when needed.
 
 ## Security and limitations
 

@@ -4,7 +4,7 @@ Personal, portable [Agent Skills](https://agentskills.io/specification) for soft
 
 ## Quick start
 
-Install the whole catalog globally (Node.js and `npx` required):
+Install the whole catalog globally (Node.js **22.20+** and `npx` required):
 
 ```bash
 npx skills add hatemecha/skills --list

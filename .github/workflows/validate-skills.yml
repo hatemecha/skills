@@ -6,6 +6,9 @@ on:
       - main
     paths:
       - "skills/**"
+      - "config/**"
+      - "docs/**"
+      - "evals/**"
       - "template/**"
       - "tests/**"
       - "scripts/**"
@@ -17,6 +20,9 @@ on:
   pull_request:
     paths:
       - "skills/**"
+      - "config/**"
+      - "docs/**"
+      - "evals/**"
       - "template/**"
       - "tests/**"
       - "scripts/**"
