@@ -4,16 +4,28 @@
 from __future__ import annotations
 
 import argparse
+import os
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 SOURCE = ROOT / "config" / "global-engineering-rules.md"
 START = "<!-- hatemecha-skills:begin -->"
 END = "<!-- hatemecha-skills:end -->"
-TARGETS = {
-    "codex": Path.home() / ".codex" / "AGENTS.md",
-    "opencode": Path.home() / ".config" / "opencode" / "AGENTS.md",
-}
+def target_paths() -> dict[str, Path]:
+    """Respect a non-default CODEX_HOME; compute paths at invocation time."""
+    codex_home = Path(os.environ.get("CODEX_HOME") or Path.home() / ".codex").expanduser()
+    return {
+        "codex": codex_home / "AGENTS.md",
+        "opencode": Path.home() / ".config" / "opencode" / "AGENTS.md",
+    }
+
+
+def shadowing_codex_override(path: Path) -> Path | None:
+    """Return the higher-precedence global override when it is non-empty."""
+    override = path.with_name("AGENTS.override.md")
+    if override.is_file() and override.read_text(encoding="utf-8").strip():
+        return override
+    return None
 
 
 def managed_text(policy: str) -> str:
@@ -60,10 +72,16 @@ def main() -> int:
     if args.print_cursor:
         print(policy.strip())
         return 0
-    targets = dict((name, TARGETS[name]) for name in (args.target or list(TARGETS)))
+    available = target_paths()
+    targets = {name: available[name] for name in (args.target or list(available))}
     errors = 0
     for name, path in targets.items():
         try:
+            if name == "codex":
+                override = shadowing_codex_override(path)
+                if override is not None:
+                    print(f"codex: WARNING: {override} takes precedence; "
+                          f"{path} will not be loaded by Codex until the override is removed or updated manually.")
             status = install(path, policy, apply=args.apply)
             print(f"{name}: {status}: {path}" + ("" if args.apply else " (preview only)"))
         except (OSError, UnicodeError, ValueError) as exc:

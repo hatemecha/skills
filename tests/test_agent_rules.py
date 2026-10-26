@@ -3,6 +3,7 @@ from __future__ import annotations
 import importlib.util
 import tempfile
 import unittest
+from unittest.mock import patch
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -46,6 +47,21 @@ class ManagedPolicyTests(unittest.TestCase):
             with self.assertRaises(ValueError):
                 installer.install(target, POLICY, apply=True)
             self.assertEqual(target.read_text(encoding="utf-8"), original)
+
+    def test_codex_home_is_respected(self):
+        with tempfile.TemporaryDirectory() as temp:
+            with patch.dict("os.environ", {"CODEX_HOME": temp}):
+                self.assertEqual(installer.target_paths()["codex"], Path(temp) / "AGENTS.md")
+
+    def test_codex_override_detection(self):
+        with tempfile.TemporaryDirectory() as temp:
+            path = Path(temp) / "AGENTS.md"
+            override = Path(temp) / "AGENTS.override.md"
+            self.assertIsNone(installer.shadowing_codex_override(path))
+            override.write_text("   \n", encoding="utf-8")
+            self.assertIsNone(installer.shadowing_codex_override(path))
+            override.write_text("# Active custom rules\n", encoding="utf-8")
+            self.assertEqual(installer.shadowing_codex_override(path), override)
 
     def test_refuses_symlink(self):
         with tempfile.TemporaryDirectory() as temp:

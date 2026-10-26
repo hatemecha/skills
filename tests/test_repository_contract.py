@@ -58,6 +58,13 @@ class PackagingContractTests(unittest.TestCase):
         )
 
 
+class WorkflowCoverageTests(unittest.TestCase):
+    def test_ci_covers_skill_policy_and_evaluations(self) -> None:
+        workflow = (ROOT / ".github/workflows/validate-skills.yml").read_text(encoding="utf-8")
+        for directory in ("skills", "config", "docs", "evals", "scripts", "tests"):
+            self.assertEqual(workflow.count(f'"{directory}/**"'), 2, directory)
+
+
 class SafetyContractTests(unittest.TestCase):
     def test_repository_execution_skills_define_trust_gate(self) -> None:
         for skill_name in ("open-source-engineering", "open-source-project"):
