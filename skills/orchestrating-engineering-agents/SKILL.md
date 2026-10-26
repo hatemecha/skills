@@ -39,6 +39,13 @@ Decision rules:
 
 Read [orchestration-model.md](references/orchestration-model.md) when choosing roles, risk routes, states, or parallelism. Use [contracts.md](references/contracts.md) for work packets and the evidence ledger.
 
+## Context boundaries
+
+- Send each worker the task contract, relevant files/refs, invariants, required evidence, and known blockers rather than the full orchestration transcript.
+- Give independent reviewers the original criteria, actual artifact/diff, and test evidence; do not anchor them on the builder's self-assessment.
+- Validate claimed state transitions against current repository/tool evidence before updating the ledger. Flag conflicts rather than silently overwriting facts.
+- Never omit a required constraint, failure trace, or security boundary just to shorten a packet. Use fresh worker contexts only if the runtime supports them; do not claim that skills reset context.
+
 ## Adaptive execution workflow
 
 1. Inspect the repository, tests, CI, affected interfaces, risks, and working-tree state.

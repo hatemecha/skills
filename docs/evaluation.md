@@ -15,6 +15,14 @@ Use [routing-cases.json](../evals/routing-cases.json) as a manually executable e
 
 Record concrete results and failures manually. Never generate synthetic "passes" for model behavior; adjust routing descriptions only after observing repeated failure patterns.
 
+## Context-efficiency trials
+
+Run at least one short, clear change and one long, multi-step task in the same disposable repository. Compare existing and revised instructions with the same model, task fixture, and available tools. Record whether native compaction, caching, or fresh-context features were active; they can change costs independently of these skills.
+
+Capture runtime-reported input/output tokens and wall time **only when available**, plus number of tool calls, repeated reads, relevant failures preserved, task correctness, and required user interventions. If actual usage is unavailable, mark it unknown rather than estimating a percentage. Inspect execution traces to check whether checkpoints were created only when justified, resumed state was verified, and source evidence survived context reduction.
+
+The paper [SKILL.state](https://arxiv.org/html/2608.26263v2) evaluates a *runtime* that replaces historical transcripts with validated structured state. These Markdown instructions do not reproduce that runtime, and its reported savings are not predictions for Codex, Cursor, or OpenCode.
+
 ## What each fixture means
 
 - `must_use`: skills expected for the test's scenario, if actually installed and discoverable.
