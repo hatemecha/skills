@@ -1,6 +1,6 @@
 ---
 name: open-source-engineering
-description: Design, implement, refactor, and review software for simplicity, readability, and low technical debt. Use when writing or changing code, reviewing architecture, reducing AI-generated complexity, or applying KISS/DRY engineering. Pair with open-source-project for licensing and publication.
+description: Design, implement, refactor, and review nontrivial software changes for simplicity, readability, and low technical debt. Use for architecture decisions, meaningful refactors, significant implementations, technical-debt audits, or reducing AI-generated complexity. Skip isolated trivial edits. Pair with open-source-project for licensing and publication.
 license: MIT
 ---
 

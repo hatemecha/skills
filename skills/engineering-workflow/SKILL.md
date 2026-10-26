@@ -11,7 +11,7 @@ Route an engineering request to the smallest useful set of practices. This skill
 ## On activation
 
 1. Determine the request, project conventions, affected behavior, uncertainty, and risk from readily available context. Inspect only what the task requires.
-2. Choose a route below. For a small clear change, skip ceremony and implement directly.
+2. Choose a route below. For a small clear change, skip loading additional skills and implement directly. Do not automatically load a general engineering skill merely because code will change.
 3. When another installed skill is relevant, load its **actual** `SKILL.md` through the runtime's supported skill mechanism. If unavailable, follow the relevant principles you can substantiate and report the limitation; do not pretend the skill was loaded.
 4. Never recursively re-enter this router. Do not load every skill by default, or spawn agents merely because a role is named.
 5. Preserve project instructions and user constraints. Project-specific requirements win over generic preferences when safe and authorized.
@@ -20,7 +20,7 @@ Route an engineering request to the smallest useful set of practices. This skill
 
 | Signal | Select | Notes |
 | --- | --- | --- |
-| Any substantive code change/review | `open-source-engineering` | Engineering baseline; keep edits scoped |
+| Nontrivial feature, refactor, architecture/debt review | `open-source-engineering` | Add specialized review/implementation discipline when justified; skip for a tiny local fix |
 | Bug, regression, unclear failure | `systematic-debugging` | Establish cause before patching |
 | New/changed behavior needing verification | `test-strategy` | Pick the smallest meaningful test surface; TDD conditional |
 | Ambiguous feature, game mechanic, major design | `engineering-brainstorming` | Brief discovery and design before implementation |

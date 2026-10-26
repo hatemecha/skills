@@ -31,3 +31,40 @@ The paper [SKILL.state](https://arxiv.org/html/2608.26263v2) evaluates a *runtim
 - `success`: human-observable outcome, not an automated assertion about model quality.
 
 CI validates only the fixture schema, uniqueness and consistency. It does not infer tool calls from prose.
+
+## Reproducible trials in disposable repositories
+
+Three small, intentionally limited Python fixtures live in [benchmark-cases.json](../evals/benchmark-cases.json). They exercise a minimal edit, a persistence regression and a new capacity feature. Their baseline tests are checked in CI: the tiny edit is already green, while the two behavioral tasks deliberately start failing. These **do not** prove agent performance.
+
+Create separate workspaces without overwriting previous trials:
+
+```bash
+python scripts/prepare_eval_case.py regression baseline
+python scripts/prepare_eval_case.py regression skills
+```
+
+Open each workspace in a supported agent with the exact prompt from the manifest, a new session, equivalent permissions, model and environment. Run the same tests after agent work: `python -m unittest discover -s . -p "test_*.py"`. Inspect the final diff and actual test output yourself. Use a separate agent profile with no global skills/rules for baseline; verify the effective loaded instructions and avoid editing your real home configuration as a benchmark shortcut.
+
+Capture raw traces when possible: `codex exec --json`, `opencode run --format json`, or `agent -p --output-format stream-json` (check the installed CLI's help). Save them outside Git, redact credentials, private data and sensitive prompts, and independently inspect actual skill-load events. An agent stating that it used a skill is not trace evidence. These commands can write files and run commands; use only disposable repositories and restricted permissions.
+
+### Recording runs
+
+Create `evals/results/runs.jsonl` (ignored by Git). Store **one JSON object per completed run**; `baseline` and `skills` must have identical `case_id`, `runtime`, `model`, `environment` and `trial`. Example schema (illustrative only; not an executed result):
+
+```json
+{"case_id":"regression","runtime":"codex","model":"model-id","environment":"linux-test","trial":1,"variant":"skills","outcome":"unknown","evidence":"","trace_checked":false,"loaded_skills":[],"input_tokens":null,"output_tokens":null,"elapsed_seconds":null,"unrelated_changes":null}
+```
+
+- `outcome`: `pass`, `fail` or `unknown`. A claimed `pass` must include a concrete `evidence` reference to test output or a reviewed artifact. The tool **does not check that reference itself**.
+- `trace_checked`: set true only after examining the runtime trace for actual skill invocations. Fill `loaded_skills` from observed events, not the assistant's prose. A baseline that loads pack skills is contaminated.
+- `input_tokens`/`output_tokens`: only populate from runtime-reported usage. Missing numbers remain null. Cursor may not report comparable token totals.
+- `trial`: use paired repetition indices (0, 1, 2...) to compare the same task independently. Preserve all failures and skipped checks.
+
+After recording both variants:
+
+```bash
+python scripts/evaluate_agent_runs.py evals/results/runs.jsonl
+python scripts/evaluate_agent_runs.py evals/results/runs.jsonl --json
+```
+
+The evaluator pairs runs by task, runtime, model, environment and trial; reports routing only with inspected traces; and reports token deltas only when both variants contain complete usage. It **does not call models, validate test claims, inspect raw traces or infer token savings**. Compare results within the same model/runtime; do not pool them indiscriminately. For long handoffs, security work and visual tasks, the original routing cases remain manual until suitable fixtures exist.

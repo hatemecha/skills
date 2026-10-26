@@ -2,10 +2,9 @@
   {
     "id": "tiny-ui",
     "prompt": "Center the misaligned shotgun HUD sprite. Preserve all other visuals.",
-    "must_use": [
-      "open-source-engineering"
-    ],
+    "must_use": [],
     "may_use": [
+      "open-source-engineering",
       "test-strategy",
       "systematic-debugging"
     ],
@@ -21,10 +20,10 @@
     "id": "regression",
     "prompt": "The save button stopped persisting after the last update; diagnose and fix it.",
     "must_use": [
-      "open-source-engineering",
       "systematic-debugging"
     ],
     "may_use": [
+      "open-source-engineering",
       "test-strategy"
     ],
     "must_not_use": [
@@ -38,10 +37,10 @@
     "id": "new-feature",
     "prompt": "Add an inventory capacity rule and expose remaining slots in the UI.",
     "must_use": [
-      "open-source-engineering",
       "test-strategy"
     ],
     "may_use": [
+      "open-source-engineering",
       "engineering-brainstorming"
     ],
     "must_not_use": [
@@ -152,10 +151,10 @@
   {
     "id": "small-task-no-checkpoint",
     "prompt": "Fix a single misleading variable name in one file. Don't add other changes.",
-    "must_use": [
+    "must_use": [],
+    "may_use": [
       "open-source-engineering"
     ],
-    "may_use": [],
     "must_not_use": [
       "context-handoff",
       "orchestrating-engineering-agents",

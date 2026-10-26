@@ -13,3 +13,5 @@ __pycache__/
 .venv/
 venv/
 node_modules/
+evals/workspaces/
+evals/results/

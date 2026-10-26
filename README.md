@@ -30,7 +30,7 @@ Cursor User Rules must be pasted manually: run `python scripts/install_agent_rul
 - `engineering-workflow` classifies intent and risk, then loads relevant skills through each runtime's documented mechanism when possible.
 - Simple changes stay simple. Debugging, design, test strategy, independent review and handoff are conditional.
 - Long tasks use selective inspection and evidence-backed checkpoints when useful, without implying that Markdown skills can reset runtime history.
-- Skill selection is model-dependent; global rules and metadata improve activation, **not guarantee it**. See [routing evaluations](docs/evaluation.md).
+- Skill selection is model-dependent; global rules and metadata improve activation, **not guarantee it**. See [routing evaluations and reproducible comparisons](docs/evaluation.md).
 
 ## Catalog
 

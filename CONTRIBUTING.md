@@ -62,7 +62,7 @@ A reference should earn its existence. Do not paste historical surveys, copied m
 4. Add only the supporting files required by the workflow.
 5. Add the skill to the catalog in `README.md`.
 6. Run the repository validation commands.
-7. Test the skill in at least one compatible agent when practical. Add activation/non-activation scenarios to `evals/routing-cases.json` when routing changes.
+7. Test the skill in at least one compatible agent when practical. Add both positive and negative activation scenarios to `evals/routing-cases.json` when routing changes. Prefer a baseline-vs-skills run with evidence before claiming quality or token improvements; use [evaluation guidance](docs/evaluation.md).
 8. If you add provider-specific metadata, confirm the skill still works conceptually without it.
 
 ## Validate locally

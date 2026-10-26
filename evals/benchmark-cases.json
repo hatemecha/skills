@@ -1,0 +1,23 @@
+[
+  {
+    "id": "small-task-no-checkpoint",
+    "fixture": "tiny-edit",
+    "prompt": "In logic.py, rename the misspelled local variable to 'amount' without changing behavior or introducing new files. Run the existing focused test.",
+    "baseline_tests": "pass",
+    "acceptance": "Only the local variable spelling changes; tests remain green; no checkpoint or additional skills required."
+  },
+  {
+    "id": "regression",
+    "fixture": "persistence-regression",
+    "prompt": "The settings update stopped persisting. Diagnose and fix it with the smallest change in settings.py. Preserve existing behavior and run the provided regression test.",
+    "baseline_tests": "fail",
+    "acceptance": "A settings update is saved on disk, old keys persist, and regression tests pass."
+  },
+  {
+    "id": "new-feature",
+    "fixture": "inventory-capacity",
+    "prompt": "Implement inventory capacity enforcement and expose the number of remaining slots. Keep the existing Inventory API as compatible as possible. Run the provided tests.",
+    "baseline_tests": "fail",
+    "acceptance": "The inventory accepts items up to capacity, rejects additional items, exposes remaining slots, and tests pass."
+  }
+]
