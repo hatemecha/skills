@@ -37,6 +37,14 @@ A route may use multiple skills sequentially. If none of the extra skills is war
 - **High risk** (auth, privacy, money, migrations, data loss, public APIs, production): demand stronger evidence and appropriate independent review. Follow repository safety boundaries.
 - Choose tools and verification based on actual runtime capabilities. Linters, compilers and tests answer deterministic questions; agents supply judgment.
 
+## Context-efficient execution
+
+- Find relevant paths and symbols before opening files. Inspect bounded ranges and load only the skills/references the task needs; do not dump the whole repository or skill catalog by default.
+- Bound tool output with targeted filters, but preserve failing diagnostics, important constraints, and paths to complete evidence. A shorter log is not useful if it conceals the cause of a failure.
+- For lengthy work, prepare or refresh a compact checkpoint at a useful boundary (handoff, context pressure, independent worker, or major milestone), not after every interaction. Record the goal, acceptance criteria, must-keep constraints, decisions, repo/ref and working-tree status, verified work/checks with evidence, unresolved risks, and exact next action. Label unknowns.
+- On continuation, inspect the live repository and revalidate any stale or conflicting checkpoint claim. Replace superseded state rather than repeatedly stacking summaries.
+- Prefer runtime-native compaction or a fresh context when supported. A skill cannot truncate an agent's conversation by itself or guarantee token savings. Skip checkpoints for small tasks.
+
 ## Guardrails
 
 - Do not use microservices, Clean Architecture, factories, interfaces, or dependency injection automatically; add boundaries only when justified.

@@ -45,6 +45,12 @@ Cursor User Rules are not a portable file; the script deliberately does not auto
 
 Restart or open a new agent session so it can discover the updated files.
 
+### Refresh an existing setup
+
+In a previously cloned `skills` directory, run `git pull --ff-only` and then `python scripts/install_agent_rules.py --apply` (use `py` on Windows if necessary). Re-run `npx skills update -g` to refresh installed skills; use the `npx skills add hatemecha/skills -g --skill '*' -a codex -a cursor -a opencode` command if new entries are missing. Reprint and replace the managed text in Cursor User Rules with `python scripts/install_agent_rules.py --print-cursor`, avoiding duplicates.
+
+No separate package or runtime is required for the new context-efficiency guidance. Native context compaction, when available, is a separate runtime capability; these instructions alone cannot shorten existing chat history or guarantee token savings.
+
 ## 3. Check that routing works
 
 Try: “Fix this small bug in the smallest scope and use the relevant installed engineering skills; report checks actually run.” Then ask: “Which installed skills did you load, and why?” No claim of activation is proof without observing the runtime's skill call or tool trace. Follow [evaluation guide](evaluation.md) for repeatable scenarios.

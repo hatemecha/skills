@@ -133,6 +133,40 @@
     "success": "Verified state, performed checks and precise next action, no invented executions."
   },
   {
+    "id": "long-running-context",
+    "prompt": "After many debugging iterations on a multi-file feature, produce a bounded verified checkpoint for another agent to resume tomorrow. Preserve acceptance criteria, unresolved failed tests and the exact next action.",
+    "must_use": [
+      "context-handoff"
+    ],
+    "may_use": [
+      "open-source-engineering",
+      "systematic-debugging"
+    ],
+    "must_not_use": [
+      "engineering-brainstorming",
+      "orchestrating-engineering-agents",
+      "open-source-project"
+    ],
+    "success": "Compact evidence-backed current state with repo/ref, actual checks, failed evidence and resumption validation; no transcript dump or claimed context reset."
+  },
+  {
+    "id": "small-task-no-checkpoint",
+    "prompt": "Fix a single misleading variable name in one file. Don't add other changes.",
+    "must_use": [
+      "open-source-engineering"
+    ],
+    "may_use": [],
+    "must_not_use": [
+      "context-handoff",
+      "orchestrating-engineering-agents",
+      "engineering-brainstorming",
+      "systematic-debugging",
+      "open-source-project",
+      "test-strategy"
+    ],
+    "success": "Targeted inspection and smallest change with no unnecessary checkpoint, long log dump, or handoff document."
+  },
+  {
     "id": "not-coding",
     "prompt": "Translate this short poem into Spanish while keeping the verse breaks.",
     "must_use": [],

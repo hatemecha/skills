@@ -23,6 +23,10 @@ task:
   required_evidence: [unit tests, integration tests, security review]
 ```
 
+## Context and state boundaries
+
+Use the smallest sufficient packet: objective, acceptance criteria, affected paths at an identifiable ref, invariants, blockers, and pointers to raw evidence. Avoid copying long conversations or logs. For independent review, include original requirements and the artifact rather than the author's conclusions. Treat state updates as proposals until checked against the actual repository or tool results; retain unresolved contradictions in the ledger.
+
 ## Work packet
 
 ```yaml
