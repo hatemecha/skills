@@ -17,6 +17,15 @@ A change should solve a recurring engineering problem more reliably than a gener
 
 ## Verification
 
-Run the commands in the [README](README.md#quality-checks). For changes to routing or behavioral instructions, describe a concrete scenario, the expected action, and any actual execution evidence. A passing static validator is not evidence of model performance.
+Run the project checks before opening a pull request:
+
+```bash
+python -m pip install -r requirements-dev.txt
+python -m unittest discover -s tests -v
+python scripts/validate_skills.py
+for skill in skills/*; do agentskills validate "$skill"; done
+```
+
+For changes to routing or behavioral instructions, describe a concrete scenario, the expected action, and any actual execution evidence. A passing static validator is not evidence of model performance.
 
 Keep pull requests scoped to one coherent change and explain why the change is useful.

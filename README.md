@@ -1,63 +1,62 @@
-# Skills
+# Engineering Skills
 
-Reusable [Agent Skills](https://agentskills.io/specification) for software engineering. Designed to work with compatible coding agents, with no runtime service or proprietary dependency.
+[English](README.md) · [Español](README.es.md)
 
-The collection favors small changes, explicit constraints, and verification proportional to risk. Each skill can be used independently; `engineering-workflow` helps select the others when needed.
+A focused collection of reusable [Agent Skills](https://agentskills.io/specification) for software development. Each skill provides practical guidance for a specific kind of work, from designing a feature to debugging and reviewing code.
 
-## Install
+Designed for compatible coding agents, including Codex, Cursor, and OpenCode.
 
-Inspect the available skills before installing:
+## Installation
 
-```sh
-npx skills add hatemecha/skills --list
-npx skills add hatemecha/skills -g -a codex -a cursor -a opencode
+```bash
+npx skills add hatemecha/skills
 ```
 
-Requires Node.js and a compatible version of the [skills CLI](https://github.com/vercel-labs/skills). Review any prompts before replacing existing skills. Verify local installation using `npx skills list -g`.
+To make the skills available across projects, use `-g`:
+
+```bash
+npx skills add hatemecha/skills -g
+```
+
+You can also [browse the collection on skills.sh](https://skills.sh/hatemecha/skills).
 
 ## Skills
 
-| Skill | Purpose |
+### Engineering
+
+| Skill | What it does |
 | --- | --- |
-| [engineering-workflow](skills/engineering-workflow/SKILL.md) | Select a proportionate workflow and relevant installed skills |
-| [open-source-engineering](skills/open-source-engineering/SKILL.md) | Implement, refactor, simplify, and review maintainable software |
-| [systematic-debugging](skills/systematic-debugging/SKILL.md) | Diagnose regressions and unexpected behavior using evidence |
-| [test-strategy](skills/test-strategy/SKILL.md) | Choose useful unit, integration, E2E, or manual checks |
-| [engineering-brainstorming](skills/engineering-brainstorming/SKILL.md) | Resolve important design uncertainty before implementation |
-| [orchestrating-engineering-agents](skills/orchestrating-engineering-agents/SKILL.md) | Coordinate independent work and evidence-based reviews |
-| [context-handoff](skills/context-handoff/SKILL.md) | Transfer verified state between agents and sessions |
-| [open-source-project](skills/open-source-project/SKILL.md) | Assess licensing, publication readiness, and project health |
+| [Engineering Workflow](skills/engineering-workflow/SKILL.md) | Selects the right approach and relevant skills for a coding task without adding unnecessary process. |
+| [Open Source Engineering](skills/open-source-engineering/SKILL.md) | Guides implementation, refactoring, and code review toward clear, maintainable solutions. |
+| [Systematic Debugging](skills/systematic-debugging/SKILL.md) | Investigates failures through reproduction, evidence, and root-cause analysis. |
+| [Test Strategy](skills/test-strategy/SKILL.md) | Chooses meaningful tests and verification methods based on the changes and risks. |
 
-### Optional automatic routing
+### Design & coordination
 
-Some agents do not automatically select a skill for every appropriate task. A compact global policy is available at [config/global-engineering-rules.md](config/global-engineering-rules.md). Installing the skills **does not** install this policy.
+| Skill | What it does |
+| --- | --- |
+| [Engineering Brainstorming](skills/engineering-brainstorming/SKILL.md) | Turns unclear requirements into a small, implementable design. |
+| [Orchestrating Engineering Agents](skills/orchestrating-engineering-agents/SKILL.md) | Coordinates independent agents and evidence-based reviews when the task warrants them. |
+| [Context Handoff](skills/context-handoff/SKILL.md) | Carries decisions, progress, and verified results between agents or sessions. |
 
-For Codex and OpenCode, preview the proposed edits before applying them:
+### Open source
 
-```sh
-python scripts/install_agent_rules.py
-python scripts/install_agent_rules.py --apply
-```
+| Skill | What it does |
+| --- | --- |
+| [Open Source Project](skills/open-source-project/SKILL.md) | Reviews licensing, documentation, and readiness for public release. |
 
-The script preserves unrelated instructions in the target files. For Cursor, run `python scripts/install_agent_rules.py --print-cursor` and paste the text into **Settings → Rules → User Rules**. Check existing rules for contradictions first.
+## Usage
 
-Routing remains model- and runtime-dependent. A skill cannot guarantee another skill loads, invoke an unavailable subagent, or reduce context usage by itself.
+Ask your agent to use a skill by name, for example:
 
-## Quality checks
+> Use `systematic-debugging` to investigate this regression.
 
-```sh
-python -m pip install -r requirements-dev.txt
-python -m unittest discover -s tests -v
-python scripts/validate_skills.py
-for skill in skills/*; do agentskills validate "$skill"; done
-```
-
-CI checks metadata, packaging, links, local installer behavior, and the Agent Skills format. These checks **do not** establish that a model always selects the correct skill or that the pack improves coding results. Such claims require controlled agent runs with trace and outcome evidence.
+For broader tasks, start with `engineering-workflow` to identify which skills are useful. Skill discovery and automatic activation depend on your agent.
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the scope and review criteria.
+Focused improvements and bug reports are welcome. See [Contributing](CONTRIBUTING.md).
 
 ## License
 
-[MIT](LICENSE). Each installable skill includes its own license notice.
+[MIT](LICENSE).
