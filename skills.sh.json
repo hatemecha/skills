@@ -1,0 +1,32 @@
+{
+  "$schema": "https://skills.sh/schemas/skills.sh.schema.json",
+  "notGrouped": "bottom",
+  "groupings": [
+    {
+      "title": "Core engineering",
+      "description": "Everyday coding, debugging, and verification.",
+      "skills": [
+        "engineering-workflow",
+        "open-source-engineering",
+        "systematic-debugging",
+        "test-strategy"
+      ]
+    },
+    {
+      "title": "Design and coordination",
+      "description": "Resolve uncertainty and maintain continuity across agents.",
+      "skills": [
+        "engineering-brainstorming",
+        "orchestrating-engineering-agents",
+        "context-handoff"
+      ]
+    },
+    {
+      "title": "Open source",
+      "description": "Licensing, publication, and repository readiness.",
+      "skills": [
+        "open-source-project"
+      ]
+    }
+  ]
+}
